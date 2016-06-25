@@ -22,6 +22,7 @@ class StatementView
             $id = $statement->getId();
             $actions = "<a href='/info/$id'>info</a>&nbsp"
                 . "<a href='/list/record/$id'>records</a>&nbsp"
+                . "<a href='/clone/$id'>clone</a>&nbsp"
                 . "<a href='/del/$id'>del</a>";
             $row->setElements([
                 new Table\Td('data'),

@@ -67,4 +67,15 @@ class Controller
         $repo->delete($id);
         return $app->redirect("/list");
     }  
+    
+    public function cloneReportAction(Application $app, $id)
+    {
+        $repo = new StatementRepo($app);
+        $original = $repo->find($id);
+        $report = clone($original);
+        $report->setName('copy_'.$original->getName());
+        $report->setId(null);
+        $repo->save($report);
+        return $app->redirect("/list");
+    }     
 }
