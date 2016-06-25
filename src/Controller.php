@@ -39,7 +39,7 @@ class Controller
         $form = $app['serializer']->normalize($form);
         return $app['twig']->render('import.twig', [
                 'form' => $form,
-                'table' => RecordView::listView($report->getRecords(), $app)
+                'table' => RecordView::listView($report, $app)
         ]);
     }
 
@@ -57,7 +57,7 @@ class Controller
         $repo = new StatementRepo($app);
         $report = $repo->find($id);
         return $app['twig']->render('list.twig', [
-            'table' => RecordView::listView($report->getRecords(), $app),
+            'table' => RecordView::listView($report, $app),
             ]);
     }
 
@@ -66,7 +66,21 @@ class Controller
         $repo = new StatementRepo($app);
         $repo->delete($id);
         return $app->redirect("/list");
-    }  
+    }
+    
+    public function deleteRecordAction(Application $app, $id, $idr)
+    {
+        $repo = new StatementRepo($app);
+        $report = $repo->find($id);
+        foreach($report->getRecords() as $k => $record){
+            if($idr == $record->getId()){
+                $report->deleteRecord($k);
+                $repo->save($report);
+                break;
+            }
+        }
+        return $app->redirect("/list/record/$id");
+    }    
     
     public function cloneReportAction(Application $app, $id)
     {

@@ -17,6 +17,7 @@ class StatementView
         $table = new Table\Table();
         
         foreach ($statements as $statement){
+            //TODO nie przeliczac za kazdym razem przy wyswietlaniu!!
             $summary = StatementLogic::calcSummary($statement->getRecords());
             $row = new Table\Tr();
             $id = $statement->getId();

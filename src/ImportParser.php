@@ -40,7 +40,8 @@ class ImportParser
             ->setReceiverBankAccount(preg_replace('/[^\d]/', '', $data[4]))
             ->setDate((new \DateTime($data[6])))
             ->setAmount($amount)
-            ->setType($type);
+            ->setType($type)
+            ->setId(uniqid());
         return $record;
     }
 
@@ -101,7 +102,8 @@ class ImportParser
             ->setReceiverBankAccount(isset($data['Rachunek odbiorcy']) ? $data['Rachunek odbiorcy'] : null)
             ->setDate(new \DateTime($data[0]))
             ->setAmount(str_replace('-', '', $amount))
-            ->setType($type);
+            ->setType($type)
+            ->setId(uniqid());
         return $record;
     }
 

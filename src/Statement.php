@@ -148,8 +148,19 @@ class Statement
         $this->records = $records;
         return $this;
     }
-
-
     
+    public function deleteRecord($index)
+    {
+        if(array_key_exists($index, $this->records)){
+            unset($this->records[$index]);
+            $this->reindexRecords();
+        }
+        return $this;
+    }    
+    
+    public function reindexRecords()
+    {
+        $this->records = array_values($this->records);
+    }
 }
 

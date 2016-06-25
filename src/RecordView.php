@@ -9,14 +9,17 @@ class RecordView
 {
     /**
      * 
-     * @param Record[] $records
+     * @param Statement $report
      * @return string
      */
-    public static function listView($records, Application $app)
+    public static function listView($report, Application $app)
     {
         $table = new Table\Table();
-        $summary = StatementLogic::calcSummary($records);
-        foreach ($records as $record){
+        $summary = StatementLogic::calcSummary($report->getRecords());
+        $id = $report->getId();
+        foreach ($report->getRecords() as $record){
+            $idr = $record->getId();
+            $actions = "<a href='/del/record/$id/$idr'>del</a>&nbsp";        
             $row = new Table\Tr();
             $row->setElements([
                 new Table\Td($record->getDate()->format('Y-m-d')),
@@ -24,12 +27,13 @@ class RecordView
                 new Table\Td($record->getReceiver()),
                 new Table\Td($record->getDesctiption()),
                 new Table\Td($record->getAmount()),
+                new Table\Td($actions),
             ]);
             $table->addElement($row);
         }
         $row = new Table\Tr();
         $row->setElements([
-                new Table\Td('plus rec: '.$summary->getTotalPlusRecords()),
+                (new Table\Td('plus rec: '.$summary->getTotalPlusRecords()))->setRowspan(2),
                 new Table\Td('total plus: '.$summary->getTotalPlus()),
                 new Table\Td('minus rec: '.$summary->getTotalMinusRecords()),
                 new Table\Td('total minus: '.$summary->getTotalMinus()),

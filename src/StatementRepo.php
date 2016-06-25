@@ -111,7 +111,7 @@ class StatementRepo
             $data['_id']  = new \MongoDB\BSON\ObjectId($id);
         }
         $bulk = new BulkWrite(['ordered' => true]);
-        $update ? $bulk->update([], $data, ['multi' => 0, 'upsert' => 1]) : $bulk->insert($data);
+        $update ? $bulk->update(['_id' => new \MongoDB\BSON\ObjectId($id)], $data, ['multi' => 0, 'upsert' => 1]) : $bulk->insert($data);
         $result = $this->mongo->executeBulkWrite(self::DB_COL, $bulk);        
 
         return $result;
