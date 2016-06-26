@@ -1,0 +1,65 @@
+{% extends "layout.twig" %}
+{% block head %} 
+    <link rel="stylesheet" href="/js/print.css"/>
+{% endblock %}
+{% block content %}
+<table width="100%">
+    <tr >
+        <td width="45%">
+            <table>
+                <tr><td class="headgrey">Raport bankowy:</td></tr>
+                <tr><td>Nazwa:{{ report.name }}</td></tr>
+                <tr><td>Rok:{{report.year}}</td></tr>
+                <tr><td>Miesiąc:{{report.month}}</td></tr>
+            </table>
+        </td>
+        <td width="55%">
+        </td>
+    </tr>   
+</table>
+<br><br>    
+<table width="100%" border="1" cellpadding="2">
+    <tr class="txtcenter" >
+        <td width="3%" class="headgrey">Lp</td>
+        <td width="10%"  class="headgrey">Data</td>
+        <td width="32%" class="headgrey">Nadawca</td>
+        <td width="45%" class="headgrey">Opis</td>
+        <td width="9%" class="headgrey">Kwota</td>
+    </tr>
+    {% for record in report.records %}
+    <tr>
+        <td>{{ loop.index}}</td>
+        <td>{{ record.date |date("Y-m-d") }}</td>
+        <td>{{ record.sender }}</td>
+        <td>{{ record.description }}</td>
+        <td class="txtright">{{ record.amount|number_format(2, '.', '') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+<table width="100%" >
+    <tr>
+        <td width="70%">
+        
+        </td>
+        <td >
+            <table width="100%" border="1" >
+                <tr>
+                    <td width="16%" class="headgrey">Uznań</td>
+                    <td width="28%" class="headgrey">Obciążeń</td>
+                    <td width="26%" class="headgrey">Suma uznań</td>
+                    <td width="28%" class="headgrey">Suma obciążeń</td>
+                    <td width="28%" class="headgrey">Bilans</td> 
+                </tr>
+                <tr>
+                    <td class="txtright">{{summary.total_plus_records}}</td>
+                    <td class="txtright">{{summary.total_minus_records}}</td>
+                    <td class="txtright">{{summary.total_plus|number_format(2, '.', '')}}</td>
+                    <td class="txtright">{{summary.total_minus|number_format(2, '.', '')}}</td>
+                    <td class="txtright">{{ summary.balance|number_format(2, '.', '') }}</td> 
+                </tr>                
+            </table>
+        </td>
+    </tr>
+</table>
+{% endblock %}

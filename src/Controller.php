@@ -34,7 +34,10 @@ class Controller
             if (count($reportData) > 0) {
                 $app['serializer']->unserialize($reportData, Statement::class, $report);
             }
+            $report->setYear($report->getRecords()[0]->getDate()->format('Y'));
+            $report->setMonth($report->getRecords()[0]->getDate()->format('m'));
             $ret = $repo->save($report);
+            return $app->redirect("/list");
         }
         $form = $app['serializer']->normalize($form);
         return $app['twig']->render('import.twig', [
@@ -91,5 +94,14 @@ class Controller
         $report->setId(null);
         $repo->save($report);
         return $app->redirect("/list");
-    }     
+    }
+    
+    public function printReportAction(Application $app, $id)
+    {
+        $report = $app['statement_repo']->find($id);
+        $summary = StatementLogic::calcSummary($report->getRecords());
+        $report = $app['serializer']->normalize($report);
+        $summary = $app['serializer']->normalize($summary);
+        return  $app['twig']->render('print.twig', ['report' => $report, 'summary' => $summary]);
+    }    
 }

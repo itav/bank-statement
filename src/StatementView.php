@@ -21,19 +21,18 @@ class StatementView
             $summary = StatementLogic::calcSummary($statement->getRecords());
             $row = new Table\Tr();
             $id = $statement->getId();
-            $actions = "<a href='/info/$id'>info</a>&nbsp"
+            $actions = "<a href='/print/$id'>print</a>&nbsp"
                 . "<a href='/list/record/$id'>records</a>&nbsp"
                 . "<a href='/clone/$id'>clone</a>&nbsp"
                 . "<a href='/del/$id'>del</a>";
             $row->setElements([
-                new Table\Td('data'),
-                new Table\Td($statement->getId()),
+                new Table\Td($statement->getYear().'/'. $statement->getMonth()),
                 new Table\Td($statement->getName()),
                 new Table\Td($summary->getTotalPlusRecords()),
                 new Table\Td($summary->getTotalPlus()),
                 new Table\Td($summary->getTotalMinusRecords()),
                 new Table\Td($summary->getTotalMinus()),
-                new Table\Td($summary->getBalace()),                
+                new Table\Td($summary->getBalance()),                
                 new Table\Td($actions),
             ]);
             $table->addElement($row);

@@ -35,7 +35,7 @@ class StatementLogic
             ->setTotalPlus($totalPlus)
             ->setTotalMinusRecords($countMinus)
             ->setTotalMinus($totalMinus)
-            ->setBalace($totalPlus - $totalMinus);
+            ->setBalance($totalPlus - $totalMinus);
         
         return $summary;
     }
@@ -48,16 +48,16 @@ class Summary
     private $totalMinusRecords = 0;
     private $totalPlus = 0.00;
     private $totalMinus = 0.00;
-    private $balace = 0.00;
+    private $balance = 0.00;
     
-    public function getBalace()
+    public function getBalance()
     {
-        return $this->balace;
+        return $this->balance;
     }
 
-    public function setBalace($balace)
+    public function setBalance($balace)
     {
-        $this->balace = $balace;
+        $this->balance = round((float)$balace,2);
         return $this;
     }
 
@@ -96,13 +96,13 @@ class Summary
 
     public function setTotalPlus($totalPlus)
     {
-        $this->totalPlus = $totalPlus;
+        $this->totalPlus = round((float)$totalPlus,2);
         return $this;
     }
 
     public function setTotalMinus($totalMinus)
     {
-        $this->totalMinus = $totalMinus;
+        $this->totalMinus = round((float)$totalMinus,2);
         return $this;
     }
 

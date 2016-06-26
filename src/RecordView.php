@@ -25,7 +25,8 @@ class RecordView
                 new Table\Td($record->getDate()->format('Y-m-d')),
                 new Table\Td($record->getSender()),
                 new Table\Td($record->getReceiver()),
-                new Table\Td($record->getDesctiption()),
+                new Table\Td($record->getDescription()),
+                new Table\Td($record->getType() == Record::TYPE_PLUS ? 'PLUS' : 'MINUS'),
                 new Table\Td($record->getAmount()),
                 new Table\Td($actions),
             ]);
@@ -33,11 +34,11 @@ class RecordView
         }
         $row = new Table\Tr();
         $row->setElements([
-                (new Table\Td('plus rec: '.$summary->getTotalPlusRecords()))->setRowspan(2),
+                (new Table\Td('plus rec: '.$summary->getTotalPlusRecords()))->setRowspan(3),
                 new Table\Td('total plus: '.$summary->getTotalPlus()),
                 new Table\Td('minus rec: '.$summary->getTotalMinusRecords()),
                 new Table\Td('total minus: '.$summary->getTotalMinus()),
-                new Table\Td('balance: '. $summary->getBalace()),
+                new Table\Td('balance: '. $summary->getBalance()),
         ]);
         $table->addElement($row);        
         $table = $app['serializer']->normalize($table);

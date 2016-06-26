@@ -18,7 +18,7 @@ class Record
      */
     private $date;
     private $amount; 
-    private $desctiption;
+    private $description;
     private $interesantId;
     
     private $sender;
@@ -62,9 +62,9 @@ class Record
         return round((float)$this->amount,2);
     }
 
-    public function getDesctiption()
+    public function getDescription()
     {
-        return $this->desctiption;
+        return $this->description;
     }
 
     public function getInteresantId()
@@ -129,9 +129,9 @@ class Record
         return $this;
     }
 
-    public function setDesctiption($desctiption)
+    public function setDescription($desctiption)
     {
-        $this->desctiption = $desctiption;
+        $this->description = $desctiption;
         return $this;
     }
 

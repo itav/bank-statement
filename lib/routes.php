@@ -8,3 +8,4 @@ $app->match('/list/record/{id}', 'App\\Finance\\Bank\\Controller::listRecordActi
 $app->get('/del/{id}', 'App\\Finance\\Bank\\Controller::deleteReportAction')->assert('id', '\w+');
 $app->get('/clone/{id}', 'App\\Finance\\Bank\\Controller::cloneReportAction')->assert('id', '\w+');
 $app->get('/del/record/{id}/{idr}', 'App\\Finance\\Bank\\Controller::deleteRecordAction')->assert('id', '\w+', 'idr', '\w+');
+$app->get('/print/{id}', 'App\\Finance\\Bank\\Controller::printReportAction')->assert('id', '\w+');

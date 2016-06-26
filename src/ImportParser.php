@@ -35,7 +35,7 @@ class ImportParser
         $record
             ->setSender($data[0])
             ->setSenderBankAccount($senderAccount)
-            ->setDesctiption($data[2])
+            ->setDescription($data[2])
             ->setReceiver($data[3])
             ->setReceiverBankAccount(preg_replace('/[^\d]/', '', $data[4]))
             ->setDate((new \DateTime($data[6])))
@@ -97,7 +97,7 @@ class ImportParser
         $record
             ->setSender(isset($data['Nadawca']) ? $data['Nadawca'] : null)
             ->setSenderBankAccount(isset($data['Rachunek nadawcy']) ? $data['Rachunek nadawcy'] : null)
-            ->setDesctiption($title)
+            ->setDescription($title)
             ->setReceiver(isset($data['Odbiorca']) ? $data['Odbiorca'] : null)
             ->setReceiverBankAccount(isset($data['Rachunek odbiorcy']) ? $data['Rachunek odbiorcy'] : null)
             ->setDate(new \DateTime($data[0]))

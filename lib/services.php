@@ -42,3 +42,8 @@ $app['mongo'] = function($app){
     $mongo = new \MongoDB\Driver\Manager($str);
     return $mongo;
 };
+
+$app['statement_repo'] = function($app){
+    $repo = new \App\Finance\Bank\StatementRepo($app);
+    return $repo;
+};
